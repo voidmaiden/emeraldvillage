@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/imgareaselect-default.css" />
+    <script type="text/javascript" src="scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.imgareaselect.pack.js"></script>
+
+<style>
+
+@font-face {
+    font-family: Pusab;
+    src: url('fonts/pusab.ttf');
+}
+body {
+    background: #eee;
+    overflow: hidden;
+    font: 7pt arial;
+    cursor: crosshair;
+}
+#workspace {
+    position: fixed;
+    top: 0px;
+    left: 300px;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 998;
+}
+#assets {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    z-index: 999;
+}
+#xpand, #minimize {
+    margin: 50px auto 10px;
+    font-family: 'Andale Mono';
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    border-radius: 999px;
+}
+#minimize {
+    display: none;
+}
+h1 {
+    font: bold 6pt Pusab;
+    color: #000;
+    text-transform: uppercase;
+    width: 100%;
+    margin: 20px 0px;
+    text-align: center;
+}
+h1 span {
+    font-size: 5pt;
+}
+span.min {
+    display: none;
+}
+.box p {
+    padding: 5px;
+}
+.hideassets {
+    width: 200px;
+    max-height: 0px;
+    margin: -15px auto 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0px;
+    transition-property: max-height;
+    transition-duration: 2s;
+    transition-timing-function: ease-out;
+}
+.showassets {
+    max-height: 300px;
+    transition-property: max-height;
+    transition-duration: 2s;
+    transition-timing-function: ease-in;
+}
+#hatbox img {
+    z-index: 9999
+}
+#headbox img {
+    z-index: 999;
+}
+#bodybox img {
+    z-index: 99;
+}
+#facebox img {
+    z-index: 99999;
+}
+.drag {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: pixelated;
+}
+.scale-up {
+  transform: scale(4);
+}
+.retiny {
+  transform: scale(0.25);
+  }
+
+</style>
+
+</head>
+
+<body>
+
+
+<div id="body">
+
+<div id="workspace"></div>
+
+<div id="assets">
+
+<button id="xpand">expand all</button>
+<button id="minimize">hide all</button>
+
+<div class="asset">
+<h1 id="hat">head decorations <span class="max">[+]</span><span class="min">[-]</span></h1>
+<div id="hatbox" class="box hideassets"><p>
+<img id="greenhair" class="drag hair" src="http://i.imgur.com/DYJaYfl.gif">
+<img id="pinkponytail" class="drag hair" src="http://i.imgur.com/sncSGEe.gif">
+<img id="yellowtopponytail" class="drag hair" src="http://i.imgur.com/HKhaoYx.gif">
+<img id="gnomehat" class="drag hair" src="http://i.imgur.com/3twi5kO.gif">
+<img id="strawberryhat" class="drag hair" src="http://i.imgur.com/xRw2Tqg.gif">
+<img id="witchhat" class="drag hair" src="http://i.imgur.com/yIrPq6A.gif">
+<img id="mushroomhat" class="drag hair" src="http://i.imgur.com/cBWfaEA.gif">
+<img id="antennae" class="drag hair" src="http://i.imgur.com/WrGbmUf.gif">
+<img id="wizardhat" class="drag hair" src="http://i.imgur.com/95MDPm2.gif">
+<img id="pinkyellowhorns" class="drag hair" src="http://i.imgur.com/JycAykC.gif">
+</p></div>
+</div>
+
+<div class="asset">
+<h1 id="head">heads <span class="max">[+]</span><span class="min">[-]</span></h1>
+<div id="headbox" class="box hideassets"><p>
+<img id="greenhead" class="drag head" src="http://i.imgur.com/5DtIbpc.gif">
+<img id="pinkhead" class="drag head" src="http://i.imgur.com/Tl4XOLy.gif">
+<img id="cutepurplehead" class="drag head" src="http://i.imgur.com/WSwPbE1.gif">
+<img id="bluebashfulhead" class="drag head" src="http://i.imgur.com/qV10wGO.gif">
+<img id="3eyesalienhead" class="drag head" src="http://i.imgur.com/EqFXOJj.gif">
+<img id="onetoothguy" class="drag head" src="http://i.imgur.com/PLj9h8h.gif">
+<img id="lemonhead" class="drag head" src="http://i.imgur.com/GRuRU7Y.gif">
+<img id="greentongueguy" class="drag head" src="http://i.imgur.com/DfEkf5x.gif">
+</p></div>
+</div>
+
+<div class="asset">
+<h1 id="body">bodies <span class="max">[+]</span><span class="min">[-]</span></h1>
+<div id="bodybox" class="box hideassets"><p>
+<img id="blueonesiebody" class="drag body" src="http://i.imgur.com/QK7h20s.gif">
+<img id="gnomeoutfit" class="drag body" src="http://i.imgur.com/ZxJaO4T.gif">
+<img id="mermaid" class="drag body" src="http://i.imgur.com/P2FUr4j.gif">
+<img id="beeoutfit" class="drag body" src="http://i.imgur.com/Na2h9mc.gif">
+<img id="butterfly" class="drag body" src="http://i.imgur.com/BToYoIZ.gif">
+<img id="caterpillar" class="drag body" src="http://i.imgur.com/Aghjchy.gif">
+<img id="flowerdress" class="drag body" src="http://i.imgur.com/cOx5CzA.gif">
+<img id="pumpkincostume" class="drag body" src="http://i.imgur.com/LLnZcf8.gif">
+<img id="snailcostume" class="drag body" src="http://i.imgur.com/ZD9yAfX.gif">
+<img id="pinkyellowonesie" class="drag body" src="http://i.imgur.com/mM1CkVa.gif">
+</p></div>
+</div>
+
+<div class="asset">
+<h1 id="face">face decorations <span class="max">[+]</span><span class="min">[-]</span></h1>
+<div id="facebox" class="box hideassets"><p>
+<img id="sunglasses" class="drag facedecor" src="http://i.imgur.com/BNWlzTE.gif">
+<img id="unibrow" class="drag facedecor" src="http://i.imgur.com/Sx1kXFP.gif">
+<img id="beard" class="drag facedecor" src="http://i.imgur.com/hXN6Znb.gif">
+</p></div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<script name="dragndrop">
+
+//Make the DIV element draggagle:
+
+var draggables = document.getElementsByClassName("drag");
+var i;
+for (i = 0; i < draggables.length; i++) {
+    dragElement(draggables[i]);
+}
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.onmousedown = dragMouseDown;
+    
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+    $(this).css("position", "absolute");
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position while the thing is being dragged:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    if (elmnt.offsetLeft > 250) {
+        $(elmnt).addClass("scale-up");
+    }
+    else {
+        $(elmnt).removeClass("scale-up");
+    }
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+    if (elmnt.offsetLeft < 250) {
+        $(elmnt).css("position", "static");
+    }
+    else {
+        $(elmnt).css("position", "absolute");
+    }
+  }
+}
+
+</script>
+
+<script name="assetboxes">
+
+$('#xpand').click(function() {
+    $('.box').addClass('showassets');
+    $(this).css('display', 'none');
+    $('#minimize').css('display', 'block');
+    $('.max').css('display', 'none');
+    $('.min').css('display', 'inline-block');
+});
+
+$('#minimize').click(function() {
+    $('.box').removeClass('showassets');
+    $(this).css('display', 'none');
+    $('#xpand').css('display', 'block');
+    $('.min').css('display', 'none');
+    $('.max').css('display', 'inline-block');
+});
+
+$('.max').click(function() {
+    var parent = $(this).parents('.asset');
+    var min = $(parent).find('.min');
+    var box = $(parent).find('.box');
+    $(this).css('display', 'none');
+    $(min).css('display', 'inline-block');
+    $(box).addClass('showassets');
+});
+
+$('.min').click(function() {
+    var parent = $(this).parents('.asset');
+    var max = $(parent).find('.max');
+    var box = $(parent).find('.box');
+    $(this).css('display', 'none');
+    $(max).css('display', 'inline-block');
+    $(box).removeClass('showassets');
+});
+
+</script>
+
+</body></html>
